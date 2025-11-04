@@ -1,4 +1,4 @@
-# HTTP Load Balancer 🚀
+# HTTP Load Balancer 
 
 A high-performance, production-ready HTTP Load Balancer built with Python 3.12+ and asyncio. This project demonstrates mastery of networking, concurrency, resilience, and system architecture.
 
