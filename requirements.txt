@@ -1,0 +1,8 @@
+# HTTP Load Balancer Dependencies
+
+# Core async HTTP framework for client and server
+aiohttp>=3.9.0
+
+# Optional: For better logging and formatting (recommended)
+# colorlog>=6.7.0
+
