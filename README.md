@@ -4,29 +4,29 @@ A high-performance, production-ready HTTP Load Balancer built with Python 3.12+ 
 
 ## 🎯 Features
 
-### Phase 1: Core Reverse Proxy (✅ Current)
+### Phase 1: Core Reverse Proxy (Current)
 - [x] HTTP reverse proxy with round-robin load balancing
 - [x] Async request forwarding using aiohttp
 - [x] Configurable backend server pool
 - [x] Request/response logging
 
-### Phase 2: Health Checks + Failover (🚧 In Progress)
+### Phase 2: Health Checks + Failover (In Progress)
 - [ ] Periodic health checks for backend servers
 - [ ] Automatic failover for unhealthy servers
 - [ ] Health status tracking
 
-### Phase 3: Advanced Routing (📋 Planned)
+### Phase 3: Advanced Routing (Planned)
 - [ ] Sticky sessions (session affinity)
 - [ ] Weighted round-robin
 - [ ] Least connections algorithm
 
-### Phase 4: Metrics & Monitoring (📋 Planned)
+### Phase 4: Metrics & Monitoring (Planned)
 - [ ] Prometheus-compatible metrics endpoint
 - [ ] Request/response statistics
 - [ ] Latency tracking
 - [ ] Error rate monitoring
 
-### Phase 5: Advanced Features (📋 Planned)
+### Phase 5: Advanced Features (Planned)
 - [ ] Rate limiting per client IP
 - [ ] LRU caching layer
 - [ ] Load-aware scheduling
