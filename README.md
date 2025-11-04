@@ -2,7 +2,7 @@
 
 A high-performance, production-ready HTTP Load Balancer built with Python 3.12+ and asyncio. This project demonstrates mastery of networking, concurrency, resilience, and system architecture.
 
-## 🎯 Features
+## Features
 
 ### Phase 1: Core Reverse Proxy (Current)
 - [x] HTTP reverse proxy with round-robin load balancing
