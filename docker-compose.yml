@@ -1,0 +1,78 @@
+version: '3.8'
+
+services:
+  # HTTP Load Balancer
+  load-balancer:
+    build: .
+    container_name: py-loadbalancer
+    ports:
+      - "8080:8080"
+    environment:
+      - LB_PORT=8080
+      - BACKEND_SERVERS=http://backend1:9001,http://backend2:9002,http://backend3:9003
+    depends_on:
+      - backend1
+      - backend2
+      - backend3
+    networks:
+      - lb-network
+    restart: unless-stopped
+
+  # Mock Backend Server 1
+  backend1:
+    image: python:3.12-slim
+    container_name: backend-server-1
+    working_dir: /app
+    command: python -m http.server 9001
+    ports:
+      - "9001:9001"
+    networks:
+      - lb-network
+    volumes:
+      - ./test_backends:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9001/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # Mock Backend Server 2
+  backend2:
+    image: python:3.12-slim
+    container_name: backend-server-2
+    working_dir: /app
+    command: python -m http.server 9002
+    ports:
+      - "9002:9002"
+    networks:
+      - lb-network
+    volumes:
+      - ./test_backends:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9002/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+  # Mock Backend Server 3
+  backend3:
+    image: python:3.12-slim
+    container_name: backend-server-3
+    working_dir: /app
+    command: python -m http.server 9003
+    ports:
+      - "9003:9003"
+    networks:
+      - lb-network
+    volumes:
+      - ./test_backends:/app
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9003/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+
+networks:
+  lb-network:
+    driver: bridge
+
