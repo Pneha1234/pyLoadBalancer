@@ -37,13 +37,13 @@ A high-performance, production-ready HTTP Load Balancer built with Python 3.12+ 
 - Python 3.11+ (tested with 3.12)
 - aiohttp >= 3.9.0
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/Pneha1234/pyLoadBalancer.git
 cd pyLoadBalancer
 
 # Create virtual environment
@@ -106,7 +106,7 @@ pytest tests/ --cov=load_balancer --cov-report=html
 pytest tests/test_server_pool.py -v
 ```
 
-## 📊 Performance
+## Performance
 
 ### Load Test Results
 
@@ -126,7 +126,7 @@ pytest tests/test_server_pool.py -v
 
 *Note: Results vary based on hardware and network conditions*
 
-## 🏗️ Architecture
+##  Architecture
 
 See [ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed architecture documentation.
 
@@ -148,9 +148,9 @@ BACKEND_SERVERS = [
 REQUEST_TIMEOUT = 30
 ```
 
-## 📈 Trade-offs & Design Decisions
+## Trade-offs & Design Decisions
 
-### ✅ What We Chose
+### What We Chose
 
 1. **Python + asyncio**
    - **Pros**: Great developer experience, async I/O, large ecosystem
@@ -199,7 +199,7 @@ REQUEST_TIMEOUT = 30
    - HTTP/2 support
    - WebSocket load balancing
 
-## 🤝 Contributing
+## Contributing
 
 This is a learning project. Contributions welcome!
 
@@ -209,18 +209,18 @@ This is a learning project. Contributions welcome!
 4. Add tests
 5. Submit a pull request
 
-## 📝 License
+## License
 
 MIT License - feel free to use this project for learning!
 
-## 🎓 Learning Resources
+## earning Resources
 
 - [asyncio Documentation](https://docs.python.org/3/library/asyncio.html)
 - [aiohttp Documentation](https://docs.aiohttp.org/)
 - [System Design Interview - Volume 2](https://www.amazon.com/System-Design-Interview-Insiders-Guide/dp/1736049119)
 - [High Performance Browser Networking](https://hpbn.co/)
 
-## 📧 Contact
+## Contact
 
 For questions or suggestions, open an issue or reach out!
 
