@@ -199,12 +199,11 @@ def create_app(
 
     async def health_handler(_: web.Request) -> web.Response:
         healthy_servers = await server_pool.get_healthy_server_snapshot()
-        status = 200 if healthy_servers else 503
         payload = {
             "status": "ok" if healthy_servers else "degraded",
             "healthy_backends": healthy_servers,
         }
-        return web.json_response(payload, status=status)
+        return web.json_response(payload)
 
     app.router.add_get("/health", health_handler)
     app.router.add_route("*", "/{path:.*}", balancer.handle_request)
