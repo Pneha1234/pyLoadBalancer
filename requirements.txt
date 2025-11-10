@@ -3,6 +3,9 @@
 # Core async HTTP framework for client and server
 aiohttp>=3.9.0
 
+# Testing (install pytest to run the test suite)
+pytest>=7.4.0
+
 # Optional: For better logging and formatting (recommended)
 # colorlog>=6.7.0
 
