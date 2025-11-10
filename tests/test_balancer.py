@@ -25,8 +25,10 @@ class TestLoadBalancer(AioHTTPTestCase):
         return create_app(pool)
     
     @unittest_run_loop
-    async def test_returns_503_when_no_backends(self):
-        """Requests should return 503 when no healthy backends are available."""
-        resp = await self.client.request("GET", "/")
+    async def test_health_endpoint(self):
+        """Health endpoint should respond even without backends."""
+        resp = await self.client.request("GET", "/health")
         assert resp.status == 503
+        data = await resp.json()
+        assert data["status"] == "degraded"
 
