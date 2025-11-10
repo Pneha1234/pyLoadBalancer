@@ -1,13 +1,14 @@
 """
 Core reverse proxy and load balancing logic.
 """
+import asyncio
 import logging
 import time
 from typing import Optional
 
 import aiohttp
 from aiohttp import web
-from aiohttp.client_exceptions import ClientError, ClientConnectorError, ClientTimeout
+from aiohttp.client_exceptions import ClientError, ClientConnectorError
 
 from load_balancer.config import config
 from load_balancer.server_pool import ServerPool
@@ -115,7 +116,7 @@ class LoadBalancer:
                 logger.error("Connection error to %s: %s", backend_url, exc)
                 await self.server_pool.mark_unhealthy(backend_url)
                 continue
-            except ClientTimeout as exc:
+            except asyncio.TimeoutError as exc:
                 last_error = exc
                 logger.error("Request timeout to %s", backend_url)
                 await self.server_pool.mark_unhealthy(backend_url)
@@ -147,7 +148,7 @@ class LoadBalancer:
 
     def _build_error_response(self, error: Optional[Exception]) -> web.Response:
         """Map transport errors to appropriate HTTP responses."""
-        if isinstance(error, ClientTimeout):
+        if isinstance(error, asyncio.TimeoutError):
             status = 504
             message = "Gateway Timeout: Backend server did not respond in time"
         elif isinstance(error, ClientConnectorError):
@@ -188,7 +189,6 @@ def create_app(
         await balancer.setup()
         if health_checker:
             await health_checker.start()
-
     async def on_cleanup(_: web.Application) -> None:
         if health_checker:
             await health_checker.stop()
@@ -197,6 +197,16 @@ def create_app(
     app.on_startup.append(on_startup)
     app.on_cleanup.append(on_cleanup)
 
+    async def health_handler(_: web.Request) -> web.Response:
+        healthy_servers = await server_pool.get_healthy_server_snapshot()
+        status = 200 if healthy_servers else 503
+        payload = {
+            "status": "ok" if healthy_servers else "degraded",
+            "healthy_backends": healthy_servers,
+        }
+        return web.json_response(payload, status=status)
+
+    app.router.add_get("/health", health_handler)
     app.router.add_route("*", "/{path:.*}", balancer.handle_request)
 
     return app
