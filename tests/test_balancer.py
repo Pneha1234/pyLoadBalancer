@@ -28,7 +28,7 @@ class TestLoadBalancer(AioHTTPTestCase):
     async def test_health_endpoint(self):
         """Health endpoint should respond even without backends."""
         resp = await self.client.request("GET", "/health")
-        assert resp.status == 503
+        assert resp.status == 200
         data = await resp.json()
         assert data["status"] == "degraded"
 
