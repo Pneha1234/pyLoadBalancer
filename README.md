@@ -213,7 +213,7 @@ This is a learning project. Contributions welcome!
 
 MIT License - feel free to use this project for learning!
 
-## earning Resources
+## Learning Resources
 
 - [asyncio Documentation](https://docs.python.org/3/library/asyncio.html)
 - [aiohttp Documentation](https://docs.aiohttp.org/)
