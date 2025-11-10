@@ -10,10 +10,10 @@ A high-performance, production-ready HTTP Load Balancer built with Python 3.12+ 
 - [x] Configurable backend server pool
 - [x] Request/response logging
 
-### Phase 2: Health Checks + Failover (In Progress)
-- [ ] Periodic health checks for backend servers
-- [ ] Automatic failover for unhealthy servers
-- [ ] Health status tracking
+### Phase 2: Health Checks + Failover (Current)
+- [x] Periodic health checks for backend servers
+- [x] Automatic failover for unhealthy servers
+- [x] Health status tracking
 
 ### Phase 3: Advanced Routing (Planned)
 - [ ] Sticky sessions (session affinity)
