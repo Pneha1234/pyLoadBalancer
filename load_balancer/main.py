@@ -11,6 +11,7 @@ import aiohttp.web
 from load_balancer.balancer import create_app
 from load_balancer.config import config
 from load_balancer.server_pool import ServerPool
+from load_balancer.utils.health_checker import HealthChecker
 
 # Configure logging
 logging.basicConfig(
@@ -51,8 +52,19 @@ def main():
         logger.error("No backend servers configured!")
         sys.exit(1)
     
+    health_checker = HealthChecker(
+        server_pool=server_pool,
+        interval=config.health_check_interval,
+        timeout=config.health_check_timeout,
+        path=config.health_check_path,
+        method=config.health_check_method,
+        expected_status=config.health_check_expected_status,
+        healthy_threshold=config.health_check_healthy_threshold,
+        unhealthy_threshold=config.health_check_unhealthy_threshold,
+    )
+
     # Create web application
-    app = create_app(server_pool)
+    app = create_app(server_pool, health_checker=health_checker)
     
     # Start the web server
     try:
